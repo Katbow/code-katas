@@ -1,6 +1,4 @@
 function comp(a, b) {
-  console.log(a);
-  console.log(b);
 
   if (a == null || b == null) {
     return false;
