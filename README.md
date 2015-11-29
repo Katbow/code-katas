@@ -1,8 +1,8 @@
 # Code Katas
 
-<img src="https://cloud.githubusercontent.com/assets/1287388/11454223/ecea01ce-961c-11e5-85d4-fdb0915c3102.png" width="80%" />
-
  _"A novice’s actions will look uneven and difficult, while a master’s appear simple and smooth."_
+
+<img src="https://cloud.githubusercontent.com/assets/1287388/11454223/ecea01ce-961c-11e5-85d4-fdb0915c3102.png" width="80%" />
 
 > **code**  
 > /kəʊd/  
