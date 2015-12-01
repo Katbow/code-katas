@@ -18,7 +18,13 @@ function lowestCommonMultiple(a, b) {
 
 function greatestCommonDivisor(a, b) {
   if (b === 0) return a;
-  return greatestCommonDivisor(b, a % b);
+  if (b > a) {var temp = a; a = b; b = temp;}
+  while (true) {
+      if (b == 0) return a;
+      a %= b;
+      if (a == 0) return b;
+      b %= a;
+  }
 }
 
 console.log(lcm(2,3,4));
