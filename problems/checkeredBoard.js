@@ -51,7 +51,7 @@ function checkeredBoard(dimension) {
     }
     var tmp = primaryColour, primaryColour = secondaryColour, secondaryColour = tmp;
   }
-  return board.join("\\n");
+  return board.join("\n");
 }
 
 
