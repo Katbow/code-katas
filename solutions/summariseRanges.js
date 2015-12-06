@@ -1,38 +1,26 @@
 function summaryRanges(nums) {
   if (nums.length == 0) { return nums; }
-  var prevNum = nums[0];
-  var currentNum;
-  var temp = [nums[0]];
-  for (var i = 1; i < nums.length; i++) {
-    currentNum = nums[i];
-    if (prevNum + 1 != currentNum && currentNum != prevNum) {
-      temp.push(prevNum);
-      temp.push(currentNum);
-    } else if (i == nums.length - 1 && currentNum != prevNum) {
-      temp.push(currentNum);
-    }
-    prevNum = currentNum;
+
+  var result = [], start = nums[0], end = nums[0], prev = nums[0];
+  var addRange = function() {
+    start === end ? result.push(String(end)) : result.push(join(start, end));
   }
 
-  var result = [];
-  var j = 1;
-  // TODO: add "->" in correct places.
-  if (temp.length == 1) {
-    result.push(temp[0].toString());
-  } else if (temp.length == 2) {
-    result.push(join(temp[0], temp[1]));
-  } else if (temp.length > 2) {
-    for (var i = 0; i < temp.length; i+=2) {
-      result.push(join(temp[i], temp[j]));
-      j += 2;
-      if (temp[j] == undefined) {
-        result.push(temp[temp.length -1].toString());
-        break;
-      }
+  for (var i = 0; i < nums.length; i++) {
+    var current = nums[i];
+    var diff = current - prev;
+    if (diff === 0) {
+      continue;
+    } else if (diff === 1) {
+      end = current;
+    } else if (diff > 1) {
+      addRange();
+      start = current;
+      end = current;
     }
-
+    prev = current;
   }
-
+  addRange();
   return result;
 }
 
@@ -40,6 +28,13 @@ function join(a, b) {
   return a + "->" + b;
 }
 
+console.log(summaryRanges([])); // []
+console.log(summaryRanges([5])); // ['5']
+console.log(summaryRanges([1, 1, 1, 1])); // ["1"]
 console.log(summaryRanges([1,2,3,4])); // ['1->4']
+console.log(summaryRanges([1,2,3,4,4])); // ['1->4']
+console.log(summaryRanges([0, 1, 2, 3, 3, 3, 4, 5])) // ["0->5"]
 console.log(summaryRanges([0, 1, 2, 5, 6, 9])); // ["0->2", "5->6", "9"]
-console.log(summaryRanges([1, 1, 1, 1])); // [1]
+console.log(summaryRanges([0, 1, 2, 3, 3, 3, 4, 4, 5, 6, 7, 7, 9, 9, 10])) // ["0->7","9->10"]
+console.log(summaryRanges([-2, 0])); // ['-2', '0']
+console.log(summaryRanges([-2,0, 1, 2, 3, 3, 3, 4, 4, 5, 6, 7, 7, 9, 9, 10, 12])) // ["-2", "0->7", "9->10", "12"]
